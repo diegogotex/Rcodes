@@ -1,4 +1,5 @@
 cool_table <- function(enrichment.obj,enrich.type,up,down){
+  #this function only works for gene SYMBOL
   
   #selecting the enrichment type
   # 1 for ClusterProfiler
