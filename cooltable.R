@@ -1,6 +1,6 @@
 cool_table <- function(enrichment.obj,enrich.type,up,down){
   #this function only works for gene SYMBOL
-  
+
   #selecting the enrichment type
   # 1 for ClusterProfiler
   # 2 for enrichR
@@ -26,8 +26,17 @@ cool_table <- function(enrichment.obj,enrich.type,up,down){
   #creating the new tab by collapsing the data frame with the enrichment and the df with the genes information
   if(enrich.type == 1){
     new_tab <- cbind(enrichment.obj@result, tab)
+    #a partir daqui é novo
+    new_tab[,4] <- sub("*\\/.*","",new_tab$BgRatio)
+    colnames(new_tab)[4] <- "Term_size"
+    new_tab <- new_tab[,c(1,2,4,6,10,11,12,13)]
+    
   } else if(enrich.type == 2){
     new_tab <- cbind(enrichment.obj, tab)
+    #a partir daqui é novo
+    new_tab[,2] <- sub(".*\\/","",new_tab$Overlap)
+    colnames(new_tab)[2] <- "Term_size"
+    new_tab <- new_tab[,c(1,2,4,10,11,12,13)]
   } 
   
   return(new_tab)
